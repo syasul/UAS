@@ -32,11 +32,11 @@ class MainActivity : AppCompatActivity() {
         if (nama.isNotEmpty()) {
             val umurDalamBulan = tahun * 12 + bulan
 
-            if (tahun <= 5 && umurDalamBulan < 72 && bulan <= 12) {
+            if (tahun <= 5 && umurDalamBulan < 72 && bulan <= 11) {
                 val bbIdeal = calculateBbIdeal(tahun, bulan)
                 resultTextView.text = "$nama \nUsia $tahun tahun, $bulan bulan \nBerat Badan Idealnya adalah $bbIdeal kg"
             } else {
-                Toast.makeText(this, "Umur anak melebihi 5 tahun atau tanggal lebih dari 12 bulan", Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, "Umur anak melebihi 5 tahun atau tanggal lebih dari 11 bulan", Toast.LENGTH_SHORT).show()
             }
         } else {
             Toast.makeText(this, "Nama tidak boleh kosong", Toast.LENGTH_SHORT).show()
@@ -46,13 +46,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun calculateBbIdeal(tahun: Int, bulan: Int): Double {
         val ageInMonths = tahun * 12 + bulan
+        val rumus =  2*ageInMonths + 8
 
-//        return ageInMonths * 0.5
 
-        return when {
-            ageInMonths < 24 -> ageInMonths * 0.5 
-            ageInMonths < 72 -> ageInMonths * 0.4
-            else -> throw IllegalArgumentException("Umur anak melebihi 5 tahun")
-        }
+        return rumus.toDouble()
+
     }
 }
